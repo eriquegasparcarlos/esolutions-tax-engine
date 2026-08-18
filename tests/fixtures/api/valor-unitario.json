@@ -1,6 +1,6 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "valor-unitario",
+  "description": "El usuario trabaja con VALOR unitario (sin IGV) en vez de precio: el IGV se agrega encima.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
   "kind": "document",
   "input": {
@@ -160,52 +160,53 @@
       "document_type_id": "01",
       "currency_id": "PEN",
       "igv_rate": 0.18,
-      "operation_type_id": "0101"
+      "operation_type_id": "0101",
+      "pricing_mode": "value"
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
-        "unit_price": 50,
-        "quantity": 3,
-        "affectation_igv_type_id": "10",
-        "unit_type_id": "NIU"
+        "name": "Servicio",
+        "quantity": 2,
+        "unit_value": 100,
+        "unit_type_id": "ZZ",
+        "affectation_igv_type_id": "10"
       }
     ]
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 200,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 200,
+    "total_base_igv": 200,
+    "total_igv": 36,
     "total_igv_free": 0,
     "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_taxes": 36,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 236,
+    "total_pay": 236,
     "items": [
       {
-        "unit_type_id": "NIU",
-        "quantity": 3,
-        "unit_value": 42.372881,
-        "unit_price": 50,
+        "unit_type_id": "ZZ",
+        "quantity": 2,
+        "unit_value": 100,
+        "unit_price": 118,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 200,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 36,
+        "total_taxes": 36,
+        "total_value": 200,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 236,
         "item_data": {
-          "name": "Servicio de consultoría",
+          "name": "Servicio",
           "internal_id": "T001"
         }
       }

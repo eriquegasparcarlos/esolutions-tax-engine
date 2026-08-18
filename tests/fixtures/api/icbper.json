@@ -1,6 +1,6 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "icbper",
+  "description": "Impuesto a la bolsa plástica: monto fijo por unidad, ajeno a la base del IGV.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
   "kind": "document",
   "input": {
@@ -160,53 +160,82 @@
       "document_type_id": "01",
       "currency_id": "PEN",
       "igv_rate": 0.18,
-      "operation_type_id": "0101"
+      "operation_type_id": "0101",
+      "icbper_rate": 0.5
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
-        "unit_price": 50,
+        "name": "Producto",
+        "unit_price": 20,
         "quantity": 3,
         "affectation_igv_type_id": "10",
         "unit_type_id": "NIU"
+      },
+      {
+        "name": "Bolsa",
+        "unit_price": 0.5,
+        "quantity": 4,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "has_icbper": true
       }
     ]
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 52.54,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 52.54,
+    "total_base_igv": 52.54,
+    "total_igv": 9.46,
     "total_igv_free": 0,
-    "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_icbper": 2,
+    "total_taxes": 11.46,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 64,
+    "total_pay": 64,
     "items": [
       {
         "unit_type_id": "NIU",
         "quantity": 3,
-        "unit_value": 42.372881,
-        "unit_price": 50,
+        "unit_value": 16.949153,
+        "unit_price": 20,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 50.85,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 9.15,
+        "total_taxes": 9.15,
+        "total_value": 50.85,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 60,
         "item_data": {
-          "name": "Servicio de consultoría",
+          "name": "Producto",
           "internal_id": "T001"
+        }
+      },
+      {
+        "unit_type_id": "NIU",
+        "quantity": 4,
+        "unit_value": 0.423729,
+        "unit_price": 0.5,
+        "affectation_igv_type_id": "10",
+        "price_type_id": "01",
+        "total_base_igv": 1.69,
+        "percentage_igv": 18,
+        "total_igv": 0.31,
+        "total_taxes": 2.31,
+        "total_value": 1.69,
+        "total_discount": 0,
+        "total_charge": 0,
+        "total": 4,
+        "item_data": {
+          "name": "Bolsa",
+          "internal_id": "T002"
         }
       }
     ],

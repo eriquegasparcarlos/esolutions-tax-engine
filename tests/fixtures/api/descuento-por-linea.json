@@ -1,6 +1,6 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "descuento-por-linea",
+  "description": "Descuento aplicado sobre una línea puntual, no sobre el documento.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
   "kind": "document",
   "input": {
@@ -164,49 +164,82 @@
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
+        "name": "Producto con descuento",
+        "unit_price": 118,
+        "quantity": 1,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "discounts": [
+          {
+            "type": "percent",
+            "value": 10
+          }
+        ]
+      },
+      {
+        "name": "Producto sin descuento",
         "unit_price": 50,
-        "quantity": 3,
+        "quantity": 2,
         "affectation_igv_type_id": "10",
         "unit_type_id": "NIU"
       }
     ]
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 174.75,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 174.75,
+    "total_base_igv": 174.75,
+    "total_igv": 31.45,
     "total_igv_free": 0,
     "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_taxes": 31.45,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 206.2,
+    "total_pay": 206.2,
     "items": [
       {
         "unit_type_id": "NIU",
-        "quantity": 3,
+        "quantity": 1,
+        "unit_value": 100,
+        "unit_price": 118,
+        "affectation_igv_type_id": "10",
+        "price_type_id": "01",
+        "total_base_igv": 90,
+        "percentage_igv": 18,
+        "total_igv": 16.2,
+        "total_taxes": 16.2,
+        "total_value": 90,
+        "total_discount": 10,
+        "total_charge": 0,
+        "total": 106.2,
+        "item_data": {
+          "name": "Producto con descuento",
+          "internal_id": "T001"
+        }
+      },
+      {
+        "unit_type_id": "NIU",
+        "quantity": 2,
         "unit_value": 42.372881,
         "unit_price": 50,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 84.75,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 15.25,
+        "total_taxes": 15.25,
+        "total_value": 84.75,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 100,
         "item_data": {
-          "name": "Servicio de consultoría",
-          "internal_id": "T001"
+          "name": "Producto sin descuento",
+          "internal_id": "T002"
         }
       }
     ],

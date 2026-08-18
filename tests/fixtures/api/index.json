@@ -1,42 +1,104 @@
 [
   {
     "file": "gravado-simple.json",
+    "kind": "document",
     "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
     "total": 150
   },
   {
     "file": "gravado-centavos.json",
-    "description": "Gravado con precio que no divide exacto: verifica que el centavo no se pierda.",
+    "kind": "document",
+    "description": "Precio que no divide exacto: verifica que el centavo no se pierda.",
     "total": 99.99
   },
   {
     "file": "importes-chicos.json",
+    "kind": "document",
     "description": "Importes muy chicos, donde el IGV redondeado pesa proporcionalmente más.",
     "total": 0.7
   },
   {
     "file": "mixto.json",
+    "kind": "document",
     "description": "Gravado + exonerado + inafecto en el mismo comprobante.",
     "total": 248
   },
   {
     "file": "con-gratuito.json",
-    "description": "Gravado más una línea gratuita (retiro 13): la gratuita no debe sumar al total.",
+    "kind": "document",
+    "description": "Gravado más una línea gratuita (retiro 13): la gratuita no suma al total.",
     "total": 150
   },
   {
     "file": "exportacion.json",
+    "kind": "document",
     "description": "Exportación (40): sin IGV y en su propio total.",
     "total": 1000
   },
   {
     "file": "descuento-global-afecta-base.json",
-    "description": "Descuento global que SÍ afecta la base imponible: se reparte dentro de cada línea (obligatorio para NC motivo 04, si no SUNAT rechaza con 3277).",
+    "kind": "document",
+    "description": "Descuento global que SÍ afecta la base: se reparte dentro de cada línea (obligatorio para NC motivo 04, si no SUNAT rechaza con 3277).",
     "total": 189.9
   },
   {
     "file": "descuento-global-no-afecta-base.json",
-    "description": "Descuento global que NO afecta la base (cat.53 código 02): base e IGV quedan intactos, solo baja el importe a pagar.",
+    "kind": "document",
+    "description": "Descuento global que NO afecta la base (cat.53 código 02): base e IGV intactos, solo baja el importe a pagar.",
     "total": 189.9
+  },
+  {
+    "file": "valor-unitario.json",
+    "kind": "document",
+    "description": "El usuario trabaja con VALOR unitario (sin IGV) en vez de precio: el IGV se agrega encima.",
+    "total": 236
+  },
+  {
+    "file": "moneda-extranjera.json",
+    "kind": "document",
+    "description": "Ítem en dólares dentro de un comprobante en soles, con tipo de cambio.",
+    "total": 750
+  },
+  {
+    "file": "icbper.json",
+    "kind": "document",
+    "description": "Impuesto a la bolsa plástica: monto fijo por unidad, ajeno a la base del IGV.",
+    "total": 64
+  },
+  {
+    "file": "descuento-por-linea.json",
+    "kind": "document",
+    "description": "Descuento aplicado sobre una línea puntual, no sobre el documento.",
+    "total": 206.2
+  },
+  {
+    "file": "con-detraccion.json",
+    "kind": "document",
+    "description": "Factura sujeta a detracción: el comprobante no cambia, cambia cuánto recibe el emisor.",
+    "total": 1000
+  },
+  {
+    "file": "con-retencion.json",
+    "kind": "document",
+    "description": "Cliente agente de retención: retiene un porcentaje del importe a pagar.",
+    "total": 1000
+  },
+  {
+    "file": "nota-credito-anulacion.json",
+    "kind": "note",
+    "description": "NC 01 (anulación): refleja los importes del comprobante afectado.",
+    "total": 150
+  },
+  {
+    "file": "nota-credito-descuento-global.json",
+    "kind": "note",
+    "description": "NC 04 (descuento global): el ajuste DEBE repartirse dentro de las líneas o SUNAT rechaza con 3277.",
+    "total": 135
+  },
+  {
+    "file": "nota-debito-intereses.json",
+    "kind": "note",
+    "description": "ND 01 (intereses por mora).",
+    "total": 25
   }
 ]

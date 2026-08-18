@@ -1,72 +1,226 @@
 {
   "name": "descuento-global-no-afecta-base",
-  "description": "Descuento global que NO afecta la base (cat.53 código 02): base e IGV quedan intactos, solo baja el importe a pagar.",
-  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
-  "engine": {
-    "igvRate": 0.18,
-    "options": {
-      "discount_global_id": "02",
-      "discount_global_type": "02",
-      "discount_global_amount": 10,
-      "globalAffectsBase": false
-    }
+  "description": "Descuento global que NO afecta la base (cat.53 código 02): base e IGV intactos, solo baja el importe a pagar.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
+  "kind": "document",
+  "input": {
+    "catalogs": {
+      "affectation_igv_types": [
+        {
+          "id": "10",
+          "free": 0,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Operación onerosa"
+        },
+        {
+          "id": "11",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por premio"
+        },
+        {
+          "id": "12",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por donación"
+        },
+        {
+          "id": "13",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro"
+        },
+        {
+          "id": "14",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por publicidad"
+        },
+        {
+          "id": "15",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Bonificaciones"
+        },
+        {
+          "id": "16",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por entrega a trabajadores"
+        },
+        {
+          "id": "17",
+          "free": 0,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - IVAP"
+        },
+        {
+          "id": "20",
+          "free": 0,
+          "exportation": 0,
+          "parent": "20",
+          "name": "Exonerado - Operación onerosa"
+        },
+        {
+          "id": "21",
+          "free": 1,
+          "exportation": 0,
+          "parent": "20",
+          "name": "Exonerado - Transferencia gratuita"
+        },
+        {
+          "id": "30",
+          "free": 0,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Operación onerosa"
+        },
+        {
+          "id": "31",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por bonificación"
+        },
+        {
+          "id": "32",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro"
+        },
+        {
+          "id": "33",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por muestras médicas"
+        },
+        {
+          "id": "34",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por convenio colectivo"
+        },
+        {
+          "id": "35",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por premio"
+        },
+        {
+          "id": "36",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por publicidad"
+        },
+        {
+          "id": "37",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Transferencia gratuita"
+        },
+        {
+          "id": "40",
+          "free": 0,
+          "exportation": 1,
+          "parent": "40",
+          "name": "Exportación de bienes o servicios"
+        }
+      ],
+      "detraction_types": [
+        {
+          "id": "01",
+          "code": "001",
+          "percentage": 12,
+          "minimum_amount": 700
+        }
+      ],
+      "retention_types": [
+        {
+          "id": "01",
+          "code": "01",
+          "percentage": 3
+        }
+      ]
+    },
+    "document": {
+      "document_type_id": "01",
+      "currency_id": "PEN",
+      "igv_rate": 0.18,
+      "operation_type_id": "0101"
+    },
+    "items": [
+      {
+        "name": "Producto",
+        "unit_price": 211,
+        "quantity": 1,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU"
+      }
+    ],
+    "global_discounts": [
+      {
+        "type": "percent",
+        "value": 10,
+        "affects_base": false
+      }
+    ]
   },
-  "input": [
-    {
-      "name": "Producto",
-      "unit_price": 211,
-      "quantity": 1,
-      "affectation_igv_type_id": "10",
-      "unit_type_id": "NIU"
-    }
-  ],
   "payload": {
     "total_taxed": 178.81,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "subtotal": 178.81,
     "total_value": 178.81,
+    "total_base_igv": 178.81,
     "total_igv": 32.19,
-    "total": 189.9,
-    "total_pay": 189.9,
+    "total_igv_free": 0,
+    "total_icbper": 0,
+    "total_taxes": 32.19,
     "total_discount": 21.1,
     "total_charge": 0,
+    "total": 189.9,
+    "total_pay": 189.9,
     "items": [
       {
+        "unit_type_id": "NIU",
+        "quantity": 1,
         "unit_value": 178.813559,
         "unit_price": 211,
-        "quantity": 1,
         "affectation_igv_type_id": "10",
-        "unit_type_id": "NIU",
-        "total_value": 178.81,
+        "price_type_id": "01",
         "total_base_igv": 178.81,
         "percentage_igv": 18,
         "total_igv": 32.19,
         "total_taxes": 32.19,
-        "total_charge": 0,
+        "total_value": 178.81,
         "total_discount": 0,
+        "total_charge": 0,
         "total": 211,
-        "price_type_id": "01",
         "item_data": {
           "name": "Producto",
           "internal_id": "T001"
         }
       }
     ],
-    "discounts": [
-      {
-        "discount_id": "02",
-        "name": "Descuento global",
-        "base": 211,
-        "factor": 0.1,
-        "amount": 21.1,
-        "percentage": 10,
-        "is_amount": false,
-        "type": "02",
-        "amount_base": 0
-      }
-    ]
-  }
+    "discounts": [],
+    "charges": []
+  },
+  "detraction": null,
+  "retention": null,
+  "note": null
 }

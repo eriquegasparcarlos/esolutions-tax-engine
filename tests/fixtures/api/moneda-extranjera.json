@@ -1,6 +1,6 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "moneda-extranjera",
+  "description": "Ítem en dólares dentro de un comprobante en soles, con tipo de cambio.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
   "kind": "document",
   "input": {
@@ -160,52 +160,54 @@
       "document_type_id": "01",
       "currency_id": "PEN",
       "igv_rate": 0.18,
-      "operation_type_id": "0101"
+      "operation_type_id": "0101",
+      "exchange_rate": 3.75
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
-        "unit_price": 50,
-        "quantity": 3,
+        "name": "Equipo importado",
+        "unit_price": 100,
+        "quantity": 2,
         "affectation_igv_type_id": "10",
-        "unit_type_id": "NIU"
+        "unit_type_id": "NIU",
+        "currency_id": "USD"
       }
     ]
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 635.59,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 635.59,
+    "total_base_igv": 635.59,
+    "total_igv": 114.41,
     "total_igv_free": 0,
     "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_taxes": 114.41,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 750,
+    "total_pay": 750,
     "items": [
       {
         "unit_type_id": "NIU",
-        "quantity": 3,
-        "unit_value": 42.372881,
-        "unit_price": 50,
+        "quantity": 2,
+        "unit_value": 317.79661,
+        "unit_price": 375,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 635.59,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 114.41,
+        "total_taxes": 114.41,
+        "total_value": 635.59,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 750,
         "item_data": {
-          "name": "Servicio de consultoría",
+          "name": "Equipo importado",
           "internal_id": "T001"
         }
       }

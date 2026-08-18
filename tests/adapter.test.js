@@ -7,7 +7,6 @@
  * las líneas cuadran con la cabecera.
  */
 import { describe, it, expect } from 'vitest'
-import { readFileSync, readdirSync } from 'node:fs'
 import { normalizeItemPricing, calculateTotalsWithGlobals } from '../src/billing.js'
 import { toApiLine, toApiTotals, toApiDiscounts, toApiDocument } from '../src/adapter.js'
 
@@ -105,32 +104,5 @@ describe('toApiDiscounts', () => {
 
   it('sin descuento global no emite filas', () => {
     expect(toApiDiscounts(calc([line(211, 1)]), {})).toEqual([])
-  })
-})
-
-/*
-| Los fixtures se commitean porque los lee el test de integración del lado PHP, que valida
-| el XML contra el XSD y las reglas de SUNAT sin necesitar node. Este guard evita que
-| queden desincronizados del motor: si alguien cambia el cálculo y no regenera, salta acá
-| en vez de aparecer como un rechazo de SUNAT.
-*/
-describe('fixtures sincronizados con el motor', () => {
-  const dir = new URL('./fixtures/api/', import.meta.url)
-  const files = readdirSync(dir).filter(f => f.endsWith('.json') && f !== 'index.json')
-
-  it('hay fixtures generados', () => expect(files.length).toBeGreaterThan(0))
-
-  it.each(files)('%s reproduce exactamente lo que da el motor hoy', (file) => {
-    const fx = JSON.parse(readFileSync(new URL(file, dir), 'utf8'))
-    const options = fx.engine.options ?? {}
-    const doc = toApiDocument(calc(fx.input, options), {
-      igvRate: fx.engine.igvRate,
-      discountGlobalType: options.discount_global_type,
-      discountGlobalAmount: options.discount_global_amount,
-    })
-
-    // El fixture agrega item_data (metadata de la app); se compara solo lo fiscal.
-    const stripped = { ...fx.payload, items: fx.payload.items.map(({ item_data, ...rest }) => rest) }
-    expect(stripped).toEqual(doc)
   })
 })

@@ -50,6 +50,12 @@ const Decimal = (() => {
 
 //////////////////////////////
 // Afectaciones IGV (Cat. 07)
+//
+// Clasificación POR DEFECTO. Se conserva para no romper a quien ya llamaba estas
+// funciones sin catálogo, pero la fuente de verdad real es la tabla del consumidor:
+// todas las funciones aceptan un resolver por `options.affectation` (ver src/catalogs.js).
+// Sin eso, el motor podía contradecir al catálogo de la aplicación — pasó con los códigos
+// 32–36, que acá estaban bien pero en el otro linaje se cobraban.
 //////////////////////////////
 const Affectation = {
   _FREE_CODES: new Set(['11', '12', '13', '14', '15', '16', '17', '21', '31', '32', '33', '34', '35', '36', '37']),
@@ -123,7 +129,7 @@ function applyOps(valueScaled, ops = [], affectBase = true) {
 //////////////////////////////////////
 // Normalización de precio ↔ valor
 //////////////////////////////////////
-export function normalizeItemPricing(item, igvRate = 0.18) {
+export function normalizeItemPricing(item, igvRate = 0.18, af = Affectation) {
   const out = {...item};
   out.item_id = out.item_id ?? out.id ?? null;
   out.name = out.name ?? '';
@@ -136,7 +142,7 @@ export function normalizeItemPricing(item, igvRate = 0.18) {
     out._input_unit_price_doc = p2; // si no hay proyección de moneda
   }
 
-  if (out.pricing_mode === 'price' && out.unit_price != null && Affectation.isTaxed(out.affectation_igv_type_id)) {
+  if (out.pricing_mode === 'price' && out.unit_price != null && af.isTaxed(out.affectation_igv_type_id)) {
     const unitPriceScaled = Decimal.toScaled(out.unit_price);
     const factorScaled = Decimal.toScaled(1 + igvRate);
     const unitValueScaled = Decimal.divS(unitPriceScaled, factorScaled);
@@ -155,7 +161,7 @@ function convertMoney(val, from, to, rate) {
   return val;
 }
 
-export function projectItemToDocCurrency(item, docCurrencyId, rate, igvRate = 0.18) {
+export function projectItemToDocCurrency(item, docCurrencyId, rate, igvRate = 0.18, af = Affectation) {
   const it = {...item};
   const from = it.currency_id || 'PEN';
   const to = docCurrencyId || 'PEN';
@@ -166,7 +172,7 @@ export function projectItemToDocCurrency(item, docCurrencyId, rate, igvRate = 0.
   }
 
   let unitPriceDocRaw = it.unit_value;
-  if (Affectation.isTaxed(it.affectation_igv_type_id)) {
+  if (af.isTaxed(it.affectation_igv_type_id)) {
     unitPriceDocRaw = it.unit_value * (1 + igvRate);
   }
 
@@ -185,12 +191,12 @@ export function projectItemToDocCurrency(item, docCurrencyId, rate, igvRate = 0.
 /////////////////////////////////////////////////////////
 // Cálculo por ítem (con reconciliación por precio UI)
 /////////////////////////////////////////////////////////
-function computeItem(item, igvRate) {
+function computeItem(item, igvRate, af = Affectation) {
   const qtyScaled = Decimal.toScaled(item.quantity || 0);
 
   // 1) unit_value (sin IGV)
   let unitValueScaled;
-  if (item.pricing_mode === 'price' && item.unit_price != null && Affectation.isTaxed(item.affectation_igv_type_id)) {
+  if (item.pricing_mode === 'price' && item.unit_price != null && af.isTaxed(item.affectation_igv_type_id)) {
     const unitPriceScaled = Decimal.toScaled(item.unit_price);
     const factor = Decimal.toScaled(1 + igvRate);
     unitValueScaled = Decimal.divS(unitPriceScaled, factor);
@@ -212,7 +218,7 @@ function computeItem(item, igvRate) {
   const {newValueScaled: baseAfectaScaled, appliedScaled: appliedAfectaScaled} = applyOps(baseInicialScaled, ops, true);
 
   // 5) IGV (gravado)
-  const cat = Affectation.category(item.affectation_igv_type_id);
+  const cat = af.category(item.affectation_igv_type_id);
   let taxScaled = 0;
   if (cat === 'taxed') taxScaled = Math.round(baseAfectaScaled * igvRate);
 
@@ -296,7 +302,7 @@ function computeItem(item, igvRate) {
 
   // IGV informativo para gratuitos gravados (11–17)
   out.igv_free = 0;
-  if (Affectation.isFreeTaxed(item.affectation_igv_type_id)) {
+  if (af.isFreeTaxed(item.affectation_igv_type_id)) {
     const baseRef = Number(out.baseInicial || 0);
     out.igv_free = Number((baseRef * igvRate).toFixed(2));
   }
@@ -316,6 +322,8 @@ function computeItem(item, igvRate) {
 ////////////////////////////////////////////////////////////
 export function calculateTotals(items = [], options = {}) {
   const igvRate = options.igvRate != null ? Number(options.igvRate) : 0.18;
+  // Clasificación del catálogo 07: la del consumidor si la pasa, si no la de este módulo.
+  const af = options.affectation ?? Affectation;
   Decimal.setConfig({moneyScale: options.moneyScale ?? 2, mathScale: options.mathScale ?? 6, roundHalfUp: options.roundHalfUp ?? true});
 
   const resultItems = [];
@@ -326,7 +334,7 @@ export function calculateTotals(items = [], options = {}) {
   let taxable_base_scaled = 0, tax_scaled = 0, subtotal_scaled = 0;
 
   for (const it of items) {
-    const computed = computeItem(it, igvRate);
+    const computed = computeItem(it, igvRate, af);
     resultItems.push(computed);
 
     const isUIPrice = (it.pricing_mode === 'price' && computed.category !== 'free' && !(it.discounts?.length || it.charges?.length));
@@ -362,7 +370,7 @@ export function calculateTotals(items = [], options = {}) {
         break;
       case 'free':
         total_free_ref += computed.baseInicial;
-        if (Affectation.isFreeTaxed(it.affectation_igv_type_id)) total_igv_free += Number(computed.igv_free || 0);
+        if (af.isFreeTaxed(it.affectation_igv_type_id)) total_igv_free += Number(computed.igv_free || 0);
         break;
     }
   }

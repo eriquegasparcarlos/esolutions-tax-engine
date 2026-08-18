@@ -1,55 +1,219 @@
 {
   "name": "importes-chicos",
   "description": "Importes muy chicos, donde el IGV redondeado pesa proporcionalmente más.",
-  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
-  "engine": {
-    "igvRate": 0.18,
-    "options": {}
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
+  "kind": "document",
+  "input": {
+    "catalogs": {
+      "affectation_igv_types": [
+        {
+          "id": "10",
+          "free": 0,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Operación onerosa"
+        },
+        {
+          "id": "11",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por premio"
+        },
+        {
+          "id": "12",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por donación"
+        },
+        {
+          "id": "13",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro"
+        },
+        {
+          "id": "14",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por publicidad"
+        },
+        {
+          "id": "15",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Bonificaciones"
+        },
+        {
+          "id": "16",
+          "free": 1,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - Retiro por entrega a trabajadores"
+        },
+        {
+          "id": "17",
+          "free": 0,
+          "exportation": 0,
+          "parent": "10",
+          "name": "Gravado - IVAP"
+        },
+        {
+          "id": "20",
+          "free": 0,
+          "exportation": 0,
+          "parent": "20",
+          "name": "Exonerado - Operación onerosa"
+        },
+        {
+          "id": "21",
+          "free": 1,
+          "exportation": 0,
+          "parent": "20",
+          "name": "Exonerado - Transferencia gratuita"
+        },
+        {
+          "id": "30",
+          "free": 0,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Operación onerosa"
+        },
+        {
+          "id": "31",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por bonificación"
+        },
+        {
+          "id": "32",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro"
+        },
+        {
+          "id": "33",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por muestras médicas"
+        },
+        {
+          "id": "34",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por convenio colectivo"
+        },
+        {
+          "id": "35",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por premio"
+        },
+        {
+          "id": "36",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Retiro por publicidad"
+        },
+        {
+          "id": "37",
+          "free": 1,
+          "exportation": 0,
+          "parent": "30",
+          "name": "Inafecto - Transferencia gratuita"
+        },
+        {
+          "id": "40",
+          "free": 0,
+          "exportation": 1,
+          "parent": "40",
+          "name": "Exportación de bienes o servicios"
+        }
+      ],
+      "detraction_types": [
+        {
+          "id": "01",
+          "code": "001",
+          "percentage": 12,
+          "minimum_amount": 700
+        }
+      ],
+      "retention_types": [
+        {
+          "id": "01",
+          "code": "01",
+          "percentage": 3
+        }
+      ]
+    },
+    "document": {
+      "document_type_id": "01",
+      "currency_id": "PEN",
+      "igv_rate": 0.18,
+      "operation_type_id": "0101"
+    },
+    "items": [
+      {
+        "name": "Bolsa",
+        "unit_price": 0.1,
+        "quantity": 7,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU"
+      }
+    ]
   },
-  "input": [
-    {
-      "name": "Bolsa",
-      "unit_price": 0.1,
-      "quantity": 7,
-      "affectation_igv_type_id": "10",
-      "unit_type_id": "NIU"
-    }
-  ],
   "payload": {
     "total_taxed": 0.59,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "subtotal": 0.59,
     "total_value": 0.59,
+    "total_base_igv": 0.59,
     "total_igv": 0.11,
-    "total": 0.7,
-    "total_pay": 0.7,
+    "total_igv_free": 0,
+    "total_icbper": 0,
+    "total_taxes": 0.11,
     "total_discount": 0,
     "total_charge": 0,
+    "total": 0.7,
+    "total_pay": 0.7,
     "items": [
       {
+        "unit_type_id": "NIU",
+        "quantity": 7,
         "unit_value": 0.084746,
         "unit_price": 0.1,
-        "quantity": 7,
         "affectation_igv_type_id": "10",
-        "unit_type_id": "NIU",
-        "total_value": 0.59,
+        "price_type_id": "01",
         "total_base_igv": 0.59,
         "percentage_igv": 18,
         "total_igv": 0.11,
         "total_taxes": 0.11,
-        "total_charge": 0,
+        "total_value": 0.59,
         "total_discount": 0,
+        "total_charge": 0,
         "total": 0.7,
-        "price_type_id": "01",
         "item_data": {
           "name": "Bolsa",
           "internal_id": "T001"
         }
       }
     ],
-    "discounts": []
-  }
+    "discounts": [],
+    "charges": []
+  },
+  "detraction": null,
+  "retention": null,
+  "note": null
 }

@@ -1,8 +1,8 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "nota-debito-intereses",
+  "description": "ND 01 (intereses por mora).",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
-  "kind": "document",
+  "kind": "note",
   "input": {
     "catalogs": {
       "affectation_igv_types": [
@@ -157,55 +157,62 @@
       ]
     },
     "document": {
-      "document_type_id": "01",
+      "document_type_id": "08",
       "currency_id": "PEN",
       "igv_rate": 0.18,
       "operation_type_id": "0101"
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
-        "unit_price": 50,
-        "quantity": 3,
+        "name": "Interés por mora",
+        "unit_price": 25,
+        "quantity": 1,
         "affectation_igv_type_id": "10",
         "unit_type_id": "NIU"
       }
-    ]
+    ],
+    "note": {
+      "affected_document_type_id": "01",
+      "affected_series": "F001",
+      "affected_number": 1,
+      "type_id": "01",
+      "description": "Intereses por mora"
+    }
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 21.19,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 21.19,
+    "total_base_igv": 21.19,
+    "total_igv": 3.81,
     "total_igv_free": 0,
     "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_taxes": 3.81,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 25,
+    "total_pay": 25,
     "items": [
       {
         "unit_type_id": "NIU",
-        "quantity": 3,
-        "unit_value": 42.372881,
-        "unit_price": 50,
+        "quantity": 1,
+        "unit_value": 21.186441,
+        "unit_price": 25,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 21.19,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 3.81,
+        "total_taxes": 3.81,
+        "total_value": 21.19,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 25,
         "item_data": {
-          "name": "Servicio de consultoría",
+          "name": "Interés por mora",
           "internal_id": "T001"
         }
       }
@@ -215,5 +222,14 @@
   },
   "detraction": null,
   "retention": null,
-  "note": null
+  "note": {
+    "kind": "debit",
+    "type_id": "01",
+    "type_name": "Intereses por mora",
+    "zero_amounts": false,
+    "description": "Intereses por mora",
+    "affected_document_type_id": "01",
+    "affected_series": "F001",
+    "affected_number": 1
+  }
 }

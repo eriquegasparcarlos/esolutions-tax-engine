@@ -1,8 +1,8 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "nota-credito-anulacion",
+  "description": "NC 01 (anulación): refleja los importes del comprobante afectado.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
-  "kind": "document",
+  "kind": "note",
   "input": {
     "catalogs": {
       "affectation_igv_types": [
@@ -157,7 +157,7 @@
       ]
     },
     "document": {
-      "document_type_id": "01",
+      "document_type_id": "07",
       "currency_id": "PEN",
       "igv_rate": 0.18,
       "operation_type_id": "0101"
@@ -170,7 +170,14 @@
         "affectation_igv_type_id": "10",
         "unit_type_id": "NIU"
       }
-    ]
+    ],
+    "note": {
+      "affected_document_type_id": "01",
+      "affected_series": "F001",
+      "affected_number": 1,
+      "type_id": "01",
+      "description": "Anulación de la operación"
+    }
   },
   "payload": {
     "total_taxed": 127.12,
@@ -215,5 +222,14 @@
   },
   "detraction": null,
   "retention": null,
-  "note": null
+  "note": {
+    "kind": "credit",
+    "type_id": "01",
+    "type_name": "Anulación de la operación",
+    "zero_amounts": false,
+    "description": "Anulación de la operación",
+    "affected_document_type_id": "01",
+    "affected_series": "F001",
+    "affected_number": 1
+  }
 }

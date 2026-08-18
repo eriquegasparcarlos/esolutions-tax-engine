@@ -1,6 +1,6 @@
 {
-  "name": "gravado-simple",
-  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "name": "con-retencion",
+  "description": "Cliente agente de retención: retiene un porcentaje del importe a pagar.",
   "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine v2)",
   "kind": "document",
   "input": {
@@ -164,48 +164,51 @@
     },
     "items": [
       {
-        "name": "Servicio de consultoría",
-        "unit_price": 50,
-        "quantity": 3,
+        "name": "Servicio",
+        "unit_price": 1000,
+        "quantity": 1,
         "affectation_igv_type_id": "10",
         "unit_type_id": "NIU"
       }
-    ]
+    ],
+    "retention": {
+      "type_id": "01"
+    }
   },
   "payload": {
-    "total_taxed": 127.12,
+    "total_taxed": 847.46,
     "total_exonerated": 0,
     "total_unaffected": 0,
     "total_exportation": 0,
     "total_free": 0,
-    "total_value": 127.12,
-    "total_base_igv": 127.12,
-    "total_igv": 22.88,
+    "total_value": 847.46,
+    "total_base_igv": 847.46,
+    "total_igv": 152.54,
     "total_igv_free": 0,
     "total_icbper": 0,
-    "total_taxes": 22.88,
+    "total_taxes": 152.54,
     "total_discount": 0,
     "total_charge": 0,
-    "total": 150,
-    "total_pay": 150,
+    "total": 1000,
+    "total_pay": 970,
     "items": [
       {
         "unit_type_id": "NIU",
-        "quantity": 3,
-        "unit_value": 42.372881,
-        "unit_price": 50,
+        "quantity": 1,
+        "unit_value": 847.457627,
+        "unit_price": 1000,
         "affectation_igv_type_id": "10",
         "price_type_id": "01",
-        "total_base_igv": 127.12,
+        "total_base_igv": 847.46,
         "percentage_igv": 18,
-        "total_igv": 22.88,
-        "total_taxes": 22.88,
-        "total_value": 127.12,
+        "total_igv": 152.54,
+        "total_taxes": 152.54,
+        "total_value": 847.46,
         "total_discount": 0,
         "total_charge": 0,
-        "total": 150,
+        "total": 1000,
         "item_data": {
-          "name": "Servicio de consultoría",
+          "name": "Servicio",
           "internal_id": "T001"
         }
       }
@@ -214,6 +217,12 @@
     "charges": []
   },
   "detraction": null,
-  "retention": null,
+  "retention": {
+    "type_id": "01",
+    "code": "01",
+    "percentage": 3,
+    "base": 1000,
+    "amount": 30
+  },
   "note": null
 }
