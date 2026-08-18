@@ -216,6 +216,8 @@
         "total_value": 90,
         "total_discount": 10,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 106.2,
         "item_data": {
           "name": "Producto con descuento",
@@ -236,6 +238,8 @@
         "total_value": 84.75,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 100,
         "item_data": {
           "name": "Producto sin descuento",

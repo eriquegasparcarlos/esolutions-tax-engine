@@ -203,6 +203,8 @@
         "total_value": 84.74,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 99.99,
         "item_data": {
           "name": "Repuesto",

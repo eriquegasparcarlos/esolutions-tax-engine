@@ -212,6 +212,8 @@
         "total_value": 50.85,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 60,
         "item_data": {
           "name": "Producto",
@@ -232,6 +234,8 @@
         "total_value": 1.69,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 2,
+        "factor_icbper": 0.5,
         "total": 4,
         "item_data": {
           "name": "Bolsa",

@@ -208,6 +208,8 @@
         "total_value": 847.46,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 1000,
         "item_data": {
           "name": "Servicio sujeto a detracción",

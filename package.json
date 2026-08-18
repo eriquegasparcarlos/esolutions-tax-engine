@@ -1,6 +1,6 @@
 {
   "name": "@esolutions/tax-engine",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Motor de impuestos SUNAT (Peru) como caja negra: calculateDocument/calculateNote con catalogos inyectables, validacion estricta y salida documentada. IGV/ICBPER, descuentos y cargos, detraccion, retencion, multimoneda y notas de credito/debito. Funciones puras, sin dependencias.",
   "type": "module",
   "main": "index.js",

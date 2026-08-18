@@ -217,6 +217,8 @@
         "total_value": 114.41,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 135,
         "item_data": {
           "name": "Servicio de consultoría",
@@ -226,11 +228,15 @@
     ],
     "discounts": [
       {
-        "chargeIndicator": false,
-        "id": "53",
-        "reasonCode": "02",
+        "discount_id": "02",
+        "name": "Descuento global",
+        "base": 0,
+        "factor": 0.1,
         "amount": 12.71,
-        "multiplierFactorNumeric": 10
+        "percentage": 10,
+        "is_amount": false,
+        "type": "02",
+        "amount_base": 0
       }
     ],
     "charges": []

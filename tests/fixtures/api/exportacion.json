@@ -203,6 +203,8 @@
         "total_value": 1000,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 1000,
         "item_data": {
           "name": "Mercadería exportada",

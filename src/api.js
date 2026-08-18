@@ -159,6 +159,9 @@ export function calculateDocument(input) {
       total_igv_free: linea.igv_free ?? 0,
 
       total_icbper: icb,
+      // Monto por bolsa aplicado. Se devuelve porque el comprobante lo declara aparte
+      // del total: SUNAT quiere la tasa y el importe.
+      factor_icbper: icb > 0 ? Number(input.items[i].icbper_rate ?? doc.icbper_rate ?? 0) : 0,
       total_value: linea.subtotal,
       total_discount: money((linea.discounts_affect_base ?? 0) + (linea.discounts_no_base ?? 0)),
       total_charge: 0,
@@ -212,8 +215,8 @@ export function calculateDocument(input) {
     lines: sinImportes ? [] : lines,
     detraction,
     retention,
-    global_discounts: calc.documentAllowances ?? [],
-    global_charges: calc.documentCharges ?? [],
+    global_discounts: mapGlobalesSalida(calc.documentAllowances, globales.affectsBase, false),
+    global_charges: mapGlobalesSalida(calc.documentCharges, globales.affectsBase, true),
     note: input.note ? describirNota(input) : null,
     meta: {
       document_type_id: doc.document_type_id,
@@ -282,6 +285,30 @@ function mapGlobales(input) {
   const affectsBase = todos.length === 0 ? true : todos.some((o) => o.affectsBase)
 
   return { discounts, charges, affectsBase }
+}
+
+/**
+ * Descuentos y cargos globales, en la forma en que hay que declararlos.
+ *
+ * `reason_code` es el código de motivo que SUNAT exige y sin el cual el comprobante no se
+ * puede armar. Si el consumidor no lo envía se deduce del catálogo 53: `02` cuando el
+ * descuento afecta la base imponible y `03` cuando no. Para los cargos se usa `51`
+ * (catálogo 55). Devolverlo vacío obligaría a que cada aplicación reinvente esta tabla.
+ */
+function mapGlobalesSalida(filas, affectsBase, esCargo) {
+  const porDefecto = esCargo ? '51' : affectsBase ? '02' : '03'
+
+  return (filas ?? []).map((a) => {
+    const percentage = Number(a.multiplierFactorNumeric ?? 0)
+    return {
+      reason_code: a.reasonCode ?? porDefecto,
+      affects_base: affectsBase,
+      base: money(a.baseAmount ?? 0),
+      percentage,
+      factor: Number((percentage / 100).toFixed(5)),
+      amount: money(a.amount),
+    }
+  })
 }
 
 /**

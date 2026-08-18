@@ -210,6 +210,8 @@
         "total_value": 178.81,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 211,
         "item_data": {
           "name": "Producto",

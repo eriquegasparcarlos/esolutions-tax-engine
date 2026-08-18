@@ -203,6 +203,8 @@
         "total_value": 0.59,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 0.7,
         "item_data": {
           "name": "Bolsa",

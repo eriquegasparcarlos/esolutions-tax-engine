@@ -210,6 +210,8 @@
         "total_value": 127.12,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 150,
         "item_data": {
           "name": "Producto vendido",
@@ -230,6 +232,8 @@
         "total_value": 0,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 0,
         "item_data": {
           "name": "Muestra sin cargo",

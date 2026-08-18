@@ -210,6 +210,8 @@
         "total_value": 21.19,
         "total_discount": 0,
         "total_charge": 0,
+        "total_icbper": 0,
+        "factor_icbper": 0,
         "total": 25,
         "item_data": {
           "name": "Interés por mora",

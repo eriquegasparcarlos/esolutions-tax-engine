@@ -193,11 +193,25 @@ for (const sc of [...scenarios, ...notes]) {
       total_value: l.total_value,
       total_discount: l.total_discount,
       total_charge: l.total_charge,
+      total_icbper: l.total_icbper,
+      factor_icbper: l.factor_icbper,
       total: l.total,
       item_data: { name: sc.items[i].name, internal_id: `T${String(i + 1).padStart(3, '0')}` },
     })),
-    discounts: r.global_discounts,
-    charges: r.global_charges,
+    // `document_discounts` nombra al motivo `discount_id`; el motor lo llama
+    // `reason_code` porque es el código del catálogo 53, no un id de la aplicación.
+    discounts: r.global_discounts.map((d) => ({
+      discount_id: d.reason_code,
+      name: 'Descuento global',
+      base: d.base, factor: d.factor, amount: d.amount, percentage: d.percentage,
+      is_amount: false, type: '02', amount_base: 0,
+    })),
+    charges: r.global_charges.map((c) => ({
+      charge_id: c.reason_code,
+      name: 'Cargo global',
+      base: c.base, factor: c.factor, amount: c.amount, percentage: c.percentage,
+      is_amount: false, type: '02', amount_base: 0,
+    })),
   }
 
   const fixture = {
