@@ -14,6 +14,7 @@ de elegir cuál importar:
 | `src/billing.js` | intipos13 (`peru_billing_totals_all`) | **Recomendado.** Es el que emite comprobantes aceptados por SUNAT hoy. |
 | `src/pos.js` | intipos v1 (`functions_2.js`) | Legacy. Se conserva para POS/hoteles mientras migran. |
 | `src/tax-engine.js` | helpers compartidos | Redondeo, clasificación cat.07, descuento global. |
+| `src/adapter.js` | traducción al comprobante | Motor → campos del dominio SUNAT. |
 
 **Coinciden numéricamente en el camino principal.** El guard en
 `tests/differential.test.js` corre los mismos 10 escenarios por ambos motores y verifica
@@ -28,7 +29,7 @@ de flotantes con `toFixed`, y agrega **proyección de moneda** y `buildBackendPa
 ```jsonc
 // package.json
 "dependencies": {
-  "@esolutions/tax-engine": "github:eriquegasparcarlos/esolutions-tax-engine#v1.2.0"
+  "@esolutions/tax-engine": "github:eriquegasparcarlos/esolutions-tax-engine#v1.3.1"
 }
 ```
 
@@ -76,6 +77,52 @@ calculateTotalsWithGlobals(items, {
 para la nota de crédito motivo 04: sin eso SUNAT rechaza con el error 3277 (*la sumatoria
 del total valor de venta de línea no corresponde al total*).
 
+## Adaptador motor → comprobante
+
+El motor nombra los importes en términos de cálculo (`subtotal`, `base`, `tax`) y el
+comprobante los guarda con los nombres del dominio SUNAT (`total_value`,
+`total_base_igv`, `total_igv`). Esa traducción **es lógica fiscal**, no plomería: con el
+mapeo incompleto el documento salía con el total correcto pero el IGV de cada **línea** en
+cero — y como el XML se arma línea por línea, SUNAT recibía los tributos descuadrados.
+
+```js
+import { toApiLine, toApiTotals, toApiDiscounts } from '@esolutions/tax-engine/adapter'
+
+const calc = calculateTotalsWithGlobals(items, { igvRate: 0.18 })
+
+const lineas = calc.items.map(l => ({
+  ...toApiLine(l, { igvRate: 0.18 }),   // solo importes
+  ...miMetadata(l),                      // nombre, imagen, lotes: de cada app
+}))
+Object.assign(form, toApiTotals(calc))
+form.discounts = toApiDiscounts(calc, { discountGlobalType, discountGlobalAmount })
+```
+
+El adaptador devuelve **solo campos de importes**. La metadata de presentación (nombre,
+imagen, lotes, listas de precio) es de cada aplicación y se le hace spread encima.
+
+## Validación contra el emisor real
+
+La cadena a probar cruza dos lenguajes: el motor calcula en JS, y quien dictamina si un
+comprobante es válido es `esolutions/xml` (PHP), que arma el UBL y lo valida contra el XSD
+y las reglas de SUNAT. Un test de cada lado por separado no ve el tramo del medio — que es
+donde vive el error **3277** (*la sumatoria del total valor de venta de línea no
+corresponde al total*).
+
+Por eso `tests/fixtures/api/` se **commitea**: son 8 escenarios generados por el motor real
+a través del adaptador, y el lado PHP los lee y los emite sin necesitar node.
+
+```bash
+pnpm fixtures   # regenerar tras cambiar el motor
+```
+
+Un test verifica que los fixtures sigan sincronizados: si alguien cambia el cálculo y no
+regenera, salta ahí en vez de aparecer como un rechazo de SUNAT.
+
+En intipos131 el consumidor es `tests/Feature/TaxEngineEmissionTest.php`, que por cada
+fixture verifica tres cosas: que emita un XML que pase XSD + reglas, que los importes del
+XML sean los que calculó el motor, y que la suma de las líneas dé el total de la cabecera.
+
 ## Defectos conocidos
 
 Están **fijados con tests** (marcados `[bug conocido]`) para que el arreglo sea un cambio
@@ -112,7 +159,7 @@ pnpm install
 pnpm test
 ```
 
-65 tests. Los de `billing.js` son de **caracterización**: fijan los números que hoy se
+93 tests. Los de `billing.js` son de **caracterización**: fijan los números que hoy se
 mandan a SUNAT, así que si uno se rompe es porque cambió la plata.
 
 ## Licencia
