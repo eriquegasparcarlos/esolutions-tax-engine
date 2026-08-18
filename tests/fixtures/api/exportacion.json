@@ -1,0 +1,55 @@
+{
+  "name": "exportacion",
+  "description": "Exportación (40): sin IGV y en su propio total.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Mercadería exportada",
+      "unit_price": 500,
+      "quantity": 2,
+      "affectation_igv_type_id": "40",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 0,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 1000,
+    "total_free": 0,
+    "subtotal": 1000,
+    "total_value": 1000,
+    "total_igv": 0,
+    "total": 1000,
+    "total_pay": 1000,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 500,
+        "unit_price": 500,
+        "quantity": 2,
+        "affectation_igv_type_id": "40",
+        "unit_type_id": "NIU",
+        "total_value": 1000,
+        "total_base_igv": 0,
+        "percentage_igv": 0,
+        "total_igv": 0,
+        "total_taxes": 0,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 1000,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Mercadería exportada",
+          "internal_id": "T001"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}

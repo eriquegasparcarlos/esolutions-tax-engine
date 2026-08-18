@@ -1,0 +1,55 @@
+{
+  "name": "importes-chicos",
+  "description": "Importes muy chicos, donde el IGV redondeado pesa proporcionalmente más.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Bolsa",
+      "unit_price": 0.1,
+      "quantity": 7,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 0.59,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 0,
+    "total_free": 0,
+    "subtotal": 0.59,
+    "total_value": 0.59,
+    "total_igv": 0.11,
+    "total": 0.7,
+    "total_pay": 0.7,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 0.084746,
+        "unit_price": 0.1,
+        "quantity": 7,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 0.59,
+        "total_base_igv": 0.59,
+        "percentage_igv": 18,
+        "total_igv": 0.11,
+        "total_taxes": 0.11,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 0.7,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Bolsa",
+          "internal_id": "T001"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}

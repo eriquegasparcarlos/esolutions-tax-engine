@@ -1,0 +1,72 @@
+{
+  "name": "descuento-global-afecta-base",
+  "description": "Descuento global que SÍ afecta la base imponible: se reparte dentro de cada línea (obligatorio para NC motivo 04, si no SUNAT rechaza con 3277).",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {
+      "discount_global_id": "02",
+      "discount_global_type": "02",
+      "discount_global_amount": 10,
+      "globalAffectsBase": true
+    }
+  },
+  "input": [
+    {
+      "name": "Producto",
+      "unit_price": 211,
+      "quantity": 1,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 160.93,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 0,
+    "total_free": 0,
+    "subtotal": 160.93,
+    "total_value": 160.93,
+    "total_igv": 28.97,
+    "total": 189.9,
+    "total_pay": 189.9,
+    "total_discount": 21.1,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 160.93,
+        "unit_price": 189.9,
+        "quantity": 1,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 160.93,
+        "total_base_igv": 160.93,
+        "percentage_igv": 18,
+        "total_igv": 28.97,
+        "total_taxes": 28.97,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 189.9,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Producto",
+          "internal_id": "T001"
+        }
+      }
+    ],
+    "discounts": [
+      {
+        "discount_id": "02",
+        "name": "Descuento global",
+        "base": 178.81,
+        "factor": 0.1,
+        "amount": 17.88,
+        "percentage": 10,
+        "is_amount": false,
+        "type": "02",
+        "amount_base": 0
+      }
+    ]
+  }
+}

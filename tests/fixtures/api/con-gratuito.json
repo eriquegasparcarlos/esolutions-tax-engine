@@ -1,0 +1,82 @@
+{
+  "name": "con-gratuito",
+  "description": "Gravado más una línea gratuita (retiro 13): la gratuita no debe sumar al total.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Producto vendido",
+      "unit_price": 50,
+      "quantity": 3,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    },
+    {
+      "name": "Muestra sin cargo",
+      "unit_price": 100,
+      "quantity": 1,
+      "affectation_igv_type_id": "13",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 127.12,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 0,
+    "total_free": 100,
+    "subtotal": 127.12,
+    "total_value": 127.12,
+    "total_igv": 22.88,
+    "total": 150,
+    "total_pay": 150,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 42.372881,
+        "unit_price": 50,
+        "quantity": 3,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 127.12,
+        "total_base_igv": 127.12,
+        "percentage_igv": 18,
+        "total_igv": 22.88,
+        "total_taxes": 22.88,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 150,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Producto vendido",
+          "internal_id": "T001"
+        }
+      },
+      {
+        "unit_value": 100,
+        "unit_price": 100,
+        "quantity": 1,
+        "affectation_igv_type_id": "13",
+        "unit_type_id": "NIU",
+        "total_value": 0,
+        "total_base_igv": 0,
+        "percentage_igv": 0,
+        "total_igv": 0,
+        "total_taxes": 0,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 0,
+        "price_type_id": "02",
+        "item_data": {
+          "name": "Muestra sin cargo",
+          "internal_id": "T002"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "gravado-centavos",
+  "description": "Gravado con precio que no divide exacto: verifica que el centavo no se pierda.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Repuesto",
+      "unit_price": 33.33,
+      "quantity": 3,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 84.74,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 0,
+    "total_free": 0,
+    "subtotal": 84.74,
+    "total_value": 84.74,
+    "total_igv": 15.25,
+    "total": 99.99,
+    "total_pay": 99.99,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 28.245763,
+        "unit_price": 33.33,
+        "quantity": 3,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 84.74,
+        "total_base_igv": 84.74,
+        "percentage_igv": 18,
+        "total_igv": 15.25,
+        "total_taxes": 15.25,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 99.99,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Repuesto",
+          "internal_id": "T001"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}

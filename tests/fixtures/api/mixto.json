@@ -1,0 +1,109 @@
+{
+  "name": "mixto",
+  "description": "Gravado + exonerado + inafecto en el mismo comprobante.",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Producto gravado",
+      "unit_price": 118,
+      "quantity": 1,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    },
+    {
+      "name": "Producto exonerado",
+      "unit_price": 50,
+      "quantity": 2,
+      "affectation_igv_type_id": "20",
+      "unit_type_id": "NIU"
+    },
+    {
+      "name": "Producto inafecto",
+      "unit_price": 30,
+      "quantity": 1,
+      "affectation_igv_type_id": "30",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 100,
+    "total_exonerated": 100,
+    "total_unaffected": 30,
+    "total_exportation": 0,
+    "total_free": 0,
+    "subtotal": 230,
+    "total_value": 230,
+    "total_igv": 18,
+    "total": 248,
+    "total_pay": 248,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 100,
+        "unit_price": 118,
+        "quantity": 1,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 100,
+        "total_base_igv": 100,
+        "percentage_igv": 18,
+        "total_igv": 18,
+        "total_taxes": 18,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 118,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Producto gravado",
+          "internal_id": "T001"
+        }
+      },
+      {
+        "unit_value": 50,
+        "unit_price": 50,
+        "quantity": 2,
+        "affectation_igv_type_id": "20",
+        "unit_type_id": "NIU",
+        "total_value": 100,
+        "total_base_igv": 0,
+        "percentage_igv": 0,
+        "total_igv": 0,
+        "total_taxes": 0,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 100,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Producto exonerado",
+          "internal_id": "T002"
+        }
+      },
+      {
+        "unit_value": 30,
+        "unit_price": 30,
+        "quantity": 1,
+        "affectation_igv_type_id": "30",
+        "unit_type_id": "NIU",
+        "total_value": 30,
+        "total_base_igv": 0,
+        "percentage_igv": 0,
+        "total_igv": 0,
+        "total_taxes": 0,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 30,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Producto inafecto",
+          "internal_id": "T003"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "gravado-simple",
+  "description": "Factura gravada simple — el caso realmente emitido y aceptado (B002-5).",
+  "generated_by": "tools/generate-fixtures.mjs (@esolutions/tax-engine)",
+  "engine": {
+    "igvRate": 0.18,
+    "options": {}
+  },
+  "input": [
+    {
+      "name": "Servicio de consultoría",
+      "unit_price": 50,
+      "quantity": 3,
+      "affectation_igv_type_id": "10",
+      "unit_type_id": "NIU"
+    }
+  ],
+  "payload": {
+    "total_taxed": 127.12,
+    "total_exonerated": 0,
+    "total_unaffected": 0,
+    "total_exportation": 0,
+    "total_free": 0,
+    "subtotal": 127.12,
+    "total_value": 127.12,
+    "total_igv": 22.88,
+    "total": 150,
+    "total_pay": 150,
+    "total_discount": 0,
+    "total_charge": 0,
+    "items": [
+      {
+        "unit_value": 42.372881,
+        "unit_price": 50,
+        "quantity": 3,
+        "affectation_igv_type_id": "10",
+        "unit_type_id": "NIU",
+        "total_value": 127.12,
+        "total_base_igv": 127.12,
+        "percentage_igv": 18,
+        "total_igv": 22.88,
+        "total_taxes": 22.88,
+        "total_charge": 0,
+        "total_discount": 0,
+        "total": 150,
+        "price_type_id": "01",
+        "item_data": {
+          "name": "Servicio de consultoría",
+          "internal_id": "T001"
+        }
+      }
+    ],
+    "discounts": []
+  }
+}
