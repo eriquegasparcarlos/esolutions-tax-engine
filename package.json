@@ -1,13 +1,14 @@
 {
   "name": "@esolutions/tax-engine",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Motor de impuestos SUNAT (IGV/ISC/ICBPER, redondeo fiscal, afectaciones, descuento global). Funciones puras, sin framework — compartido entre POS, hoteles y otros proyectos ESolutions.",
   "type": "module",
   "main": "index.js",
   "exports": {
     ".": "./index.js",
     "./tax-engine": "./src/tax-engine.js",
-    "./pos": "./src/pos.js"
+    "./pos": "./src/pos.js",
+    "./billing": "./src/billing.js"
   },
   "files": [
     "index.js",
@@ -26,5 +27,12 @@
     "tax"
   ],
   "author": "Carlos Erique Gaspar <eriquegasparcarlos@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  }
 }
